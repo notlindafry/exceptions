@@ -102,13 +102,13 @@ RISK-DATA-EXFIL carries **$350k–$1.3M** in residual annual loss against a **$6
 
 Grouped by root cause (the control deviated from), ranked by expected residual contribution. Each row is ready to assign. Only clusters that breach an appetite — or whose upper bound alone would — are listed; clusters that sit within appetite appear in the drift view, not here.
 
-| Rank | Cluster / exception | Expected residual | Breaches | Remediation | Owner | Notes |
+| Rank | Cluster / exception | Expected residual | Breaches | Action to take | Owner | Notes |
 |---|---|---|---|---|---|---|
-| 1 | EXC-2026-0170 — Run core services single-region to cut infrastructure cost | $612k–$5.8M | PLATFORM-OUTAGE | deploy_multi_region_active_active, target Q4 2026 | platform-lead@company.com | well-formed |
-| 2 | EXC-2026-0171 — Skip quarterly platform DR test to free the team for migration | $332k–$3.1M | PLATFORM-OUTAGE | resume_quarterly_dr_tests, target Q3 2026 | platform-lead@company.com | well-formed |
-| 3 | IAM-LEGACY-AUTH-001 (cluster, 12 exceptions) | $567k–$970k | ACCT-TAKEOVER | enforce_sso_via_idp, target Q3 2026 | platform-lead@company.com | 4 of 12 malformed, re-assess first |
-| 4 | DLP-EXPORT-001 (cluster, 3 exceptions) | $229k–$1.1M | DATA-EXFIL | re_enable_dlp_with_tuned_rules, target Q3 2026 | data-platform-lead@company.com | well-formed |
-| 5 | EXC-2026-0151 — Service-account sprawl on migrated workloads | $101k–$718k | ACCT-TAKEOVER | rotate_and_scope_service_accounts, target Q3 2026 | iam-lead@company.com | upper bound alone breaches appetite (tail risk) |
+| 1 | EXC-2026-0170 — Run core services single-region to cut infrastructure cost | $612k–$5.8M | PLATFORM-OUTAGE | Deploy multi region active active in order to reduce probability of realization no later than 2026-12-01 | platform-lead@company.com | well-formed |
+| 2 | EXC-2026-0171 — Skip quarterly platform DR test to free the team for migration | $332k–$3.1M | PLATFORM-OUTAGE | Resume quarterly dr tests in order to reduce probability of realization no later than 2026-09-30 | platform-lead@company.com | well-formed |
+| 3 | IAM-LEGACY-AUTH-001 (cluster, 12 exceptions) | $567k–$970k | ACCT-TAKEOVER | Enforce sso via idp in order to reduce probability of realization no later than 2026-09-01 | platform-lead@company.com | 4 of 12 malformed, re-assess first |
+| 4 | DLP-EXPORT-001 (cluster, 3 exceptions) | $229k–$1.1M | DATA-EXFIL | Re enable dlp with tuned rules in order to reduce loss magnitude no later than 2026-09-01 | data-platform-lead@company.com | well-formed |
+| 5 | EXC-2026-0151 — Service-account sprawl on migrated workloads | $101k–$718k | ACCT-TAKEOVER | Rotate and scope service accounts in order to reduce probability of realization no later than 2026-09-01 | iam-lead@company.com | upper bound alone breaches appetite (tail risk) |
 
 *10 further clusters contribute to risks that remain within appetite and are not ranked here.*
 

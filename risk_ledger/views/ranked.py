@@ -10,6 +10,7 @@ returned for a real assessment instead of ranked as if it were real.
 
 from __future__ import annotations
 
+import datetime as dt
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 
@@ -18,7 +19,7 @@ from ..engine import Engine
 from ..loader import Corpus
 from ..models import Exception_
 from ..montecarlo import Band
-from ..render import fmt_band, join_clause, md_table, plural, quarter_label
+from ..render import fmt_band, join_clause, md_table, plural
 
 
 def _modal(values: list[str]) -> str | None:
@@ -42,7 +43,8 @@ class Cluster:
     breaches: list[str] = field(default_factory=list)
     tail_risk: bool = False
     mechanism: str = ""
-    target_quarter: str = ""
+    reduces: str = ""
+    deadline: dt.date | None = None
     owner: str = ""
 
     @property
@@ -57,6 +59,18 @@ class Cluster:
             return f"{e.id} — {e.title}" if e.title else e.id
         ctrl = self.control or "(no control)"
         return f"{ctrl} (cluster, {plural(len(self.members), 'exception')})"
+
+    @property
+    def action_to_take(self) -> str:
+        """Narrative remediation built from the cluster's well-formed members:
+        modal mechanism, modal reduces, and the latest member deadline."""
+        if not self.mechanism:
+            return "—"
+        when = self.deadline.isoformat() if self.deadline else "—"
+        text = (
+            f"{self.mechanism} in order to reduce {self.reduces} no later than {when}"
+        ).replace("_", " ")
+        return text[:1].upper() + text[1:]
 
 
 def build_clusters(engine: Engine, corpus: Corpus) -> list[Cluster]:
@@ -101,8 +115,9 @@ def build_clusters(engine: Engine, corpus: Corpus) -> list[Cluster]:
 
         # Remediation payload from the clean members.
         cl.mechanism = _modal([m.remediation_mechanism for m in well_formed]) or ""
-        targets = [m.remediation_target_date for m in well_formed if m.remediation_target_date]
-        cl.target_quarter = quarter_label(max(targets)) if targets else ""
+        cl.reduces = _modal([m.remediation_reduces for m in well_formed]) or ""
+        expiries = [m.expires_on for m in well_formed if m.expires_on]
+        cl.deadline = max(expiries) if expiries else None
         cl.owner = _modal([m.owner for m in well_formed]) or "—"
         clusters.append(cl)
 
@@ -181,18 +196,13 @@ def render_ranked(engine: Engine, corpus: Corpus, config: Config) -> str:
             notes.append("upper bound alone breaches appetite (tail risk)")
         if not notes:
             notes.append("well-formed")
-        remediation = (
-            f"{c.mechanism}, target {c.target_quarter}"
-            if c.mechanism and c.target_quarter
-            else (c.mechanism or "—")
-        )
         rows.append(
             [
                 str(i),
                 c.label,
                 fmt_band(c.band),
                 join_clause(c.breaches) or "—",
-                remediation,
+                c.action_to_take,
                 c.owner,
                 "; ".join(notes),
             ]
@@ -200,7 +210,7 @@ def render_ranked(engine: Engine, corpus: Corpus, config: Config) -> str:
     if rows:
         out.append(
             md_table(
-                ["Rank", "Cluster / exception", "Expected residual", "Breaches", "Remediation", "Owner", "Notes"],
+                ["Rank", "Cluster / exception", "Expected residual", "Breaches", "Action to take", "Owner", "Notes"],
                 rows,
             )
         )
