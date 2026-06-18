@@ -126,17 +126,6 @@ def build_trajectory(footprint: Footprint, config: Config, period_end: dt.date |
     )
 
 
-def _sparkline(monthly: list[tuple[str, int]]) -> str:
-    if not monthly:
-        return ""
-    blocks = "▁▂▃▄▅▆▇█"
-    counts = [n for _, n in monthly]
-    hi = max(counts)
-    if hi == 0:
-        return ""
-    return "".join(blocks[min(len(blocks) - 1, round((n / hi) * (len(blocks) - 1)))] for n in counts)
-
-
 def _okr_section(engine: Engine, corpus: Corpus, config: Config, okr: str) -> str:
     fp = build_footprint(engine, corpus, okr)
     meta = corpus.okrs.get(okr)
@@ -213,13 +202,20 @@ def _okr_section(engine: Engine, corpus: Corpus, config: Config, okr: str) -> st
         lines.append("")
 
     if traj:
-        spark = _sparkline(traj.monthly)
-        trail = f"  `{spark}`" if spark else ""
         lines.append(
-            f"**Trajectory** ({traj.earliest.isoformat()} {EN_DASH} {traj.latest.isoformat()}): "
-            + ", ".join(f"{label} {n}" for label, n in traj.monthly)
-            + trail
+            f"**Trajectory** ({traj.earliest.isoformat()} {EN_DASH} {traj.latest.isoformat()})"
         )
+        lines.append("")
+        traj_rows = []
+        prev = None
+        for label, n in traj.monthly:
+            if prev is None:
+                change = "—"  # first row has no previous month
+            else:
+                change = f"{round((n - prev) / prev * 100):+d}%"
+            traj_rows.append([label, str(n), change])
+            prev = n
+        lines.append(md_table(["Month", "Exceptions filed", "Month Over Month Change"], traj_rows))
         lines.append("")
 
     return "\n".join(lines)

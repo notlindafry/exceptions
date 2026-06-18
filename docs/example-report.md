@@ -38,7 +38,16 @@ Each OKR has two footprints: the risk it accepts on itself, and the risk it push
 | trust-and-safety | 3 | $170k–$546k |
 | core-platform | 1 | $332k–$3.1M |
 
-**Trajectory** (2026-01-12 – 2026-06-14): 2026-01 1, 2026-02 2, 2026-03 3, 2026-04 1, 2026-05 19, 2026-06 9  `▁▂▂▁█▄`
+**Trajectory** (2026-01-12 – 2026-06-14)
+
+| Month | Exceptions filed | Month Over Month Change |
+|---|---|---|
+| 2026-01 | 1 | — |
+| 2026-02 | 2 | +100% |
+| 2026-03 | 3 | +50% |
+| 2026-04 | 1 | -67% |
+| 2026-05 | 19 | +1800% |
+| 2026-06 | 9 | -53% |
 
 ---
 
