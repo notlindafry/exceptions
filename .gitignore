@@ -8,3 +8,7 @@ dist/
 .venv/
 venv/
 .DS_Store
+
+# Generated reports (the canonical sample lives at docs/example-report.md).
+/report.html
+/report.md
