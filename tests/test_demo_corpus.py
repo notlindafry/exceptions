@@ -18,6 +18,7 @@ from risk_ledger.loader import load_corpus
 from risk_ledger.validation import validate_corpus
 from risk_ledger.views.drift import build_footprint
 from risk_ledger.views.ranked import fix_first_clusters
+from risk_ledger.views.renewals import flagged_renewals
 
 DATA = Path(__file__).resolve().parent.parent / "data"
 
@@ -117,6 +118,24 @@ def test_migration_external_footprint(built):
     }
     # External footprint still outweighs internal -- the migration's invisible cost.
     assert fp.external_band.mean > fp.internal_band.mean
+
+
+def test_persistence_flagged(built):
+    corpus, config, _ = built
+    flagged = flagged_renewals(corpus, config)
+    assert {e.id for e in flagged} == {
+        "EXC-2026-0310",
+        "EXC-2026-0312",
+        "EXC-2026-0314",
+        "EXC-2026-0313",
+        "EXC-2026-0122",
+    }
+    counts = [e.renewal_count for e in flagged]
+    assert counts == sorted(counts, reverse=True)  # descending
+    assert counts[0] == 5
+    # 0315 is renewed 3x but re-examined; 0311 (1) and 0316 (2) are below threshold.
+    renewed_once = [e for e in corpus.exceptions if e.is_active and e.renewal_count >= 1]
+    assert len(renewed_once) == 8
 
 
 def test_cli_validate_and_report(capsys):

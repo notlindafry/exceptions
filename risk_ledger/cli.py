@@ -4,7 +4,8 @@
     risk-ledger drift [OKR]                per-OKR drift lens
     risk-ledger appetite [RISK]            per-risk appetite-breach lens
     risk-ledger ranked                     the ranked action list
-    risk-ledger report                     the full narrative report (all three lenses)
+    risk-ledger renewals                   persistence: 'temporary forever' exceptions
+    risk-ledger report                     the full narrative report
 
 Global options pin the Monte Carlo run and the calibration window; they override
 any config.yaml in the corpus.
@@ -25,6 +26,7 @@ from .validation import validate_corpus
 from .views.appetite import render_appetite
 from .views.drift import render_drift
 from .views.ranked import render_ranked
+from .views.renewals import render_renewals
 
 
 def _build_config(args: argparse.Namespace, data_dir: Path) -> Config:
@@ -131,6 +133,12 @@ def _cmd_ranked(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_renewals(args: argparse.Namespace) -> int:
+    corpus, cfg, _, engine = _prepare(args)
+    print(render_renewals(engine, corpus, cfg))
+    return 0
+
+
 def _cmd_report(args: argparse.Namespace) -> int:
     corpus, cfg, _, engine = _prepare(args)
     text = render_report(engine, corpus, cfg)
@@ -189,6 +197,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("ranked", help="ranked action list")
 
+    sub.add_parser("renewals", help="persistence view: 'temporary forever' exceptions")
+
     p_report = sub.add_parser("report", help="full narrative report")
     p_report.add_argument("--out", default=None, help="write to a file instead of stdout")
     p_report.add_argument(
@@ -213,6 +223,7 @@ def main(argv: list[str] | None = None) -> int:
         "drift": _cmd_drift,
         "appetite": _cmd_appetite,
         "ranked": _cmd_ranked,
+        "renewals": _cmd_renewals,
         "report": _cmd_report,
     }
     try:

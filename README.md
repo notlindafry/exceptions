@@ -81,6 +81,7 @@ risk-ledger report --html            # formatted HTML report, written to report.
 risk-ledger drift [OKR]              # per-OKR drift lens
 risk-ledger appetite [RISK]          # per-risk appetite-breach lens
 risk-ledger ranked                   # the ranked action list
+risk-ledger renewals                 # persistence: "temporary forever" exceptions renewed unchanged
 ```
 
 By default the tool reads the corpus in `./data`. A worked example corpus ships

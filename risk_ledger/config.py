@@ -33,6 +33,11 @@ DEFAULT_FINAL_STRETCH_WEEKS = 8
 # culprit, lower it to call more breaches single-acceptance.
 DEFAULT_SINGLE_ACCEPTANCE_SHARE = 0.5
 
+# Persistence. An active exception renewed at least this many times whose
+# justification was never revisited is "temporary forever" -- a temporary
+# acceptance that has quietly become the rule.
+DEFAULT_RENEWAL_ALERT_COUNT = 3
+
 
 @dataclass
 class Config:
@@ -41,6 +46,7 @@ class Config:
     refresh_window_days: int = DEFAULT_REFRESH_WINDOW_DAYS
     final_stretch_weeks: int = DEFAULT_FINAL_STRETCH_WEEKS
     single_acceptance_share: float = DEFAULT_SINGLE_ACCEPTANCE_SHARE
+    renewal_alert_count: int = DEFAULT_RENEWAL_ALERT_COUNT
     # The reference "today" used for staleness and expiry checks. Defaults to the
     # real today; pinned in tests and for reproducing a historical report.
     as_of: dt.date = None  # type: ignore[assignment]
@@ -50,6 +56,8 @@ class Config:
             self.as_of = dt.date.today()
         if not 0.0 < self.single_acceptance_share <= 1.0:
             raise ValueError("single_acceptance_share must be in (0, 1]")
+        if self.renewal_alert_count < 1:
+            raise ValueError("renewal_alert_count must be a positive integer")
 
     @classmethod
     def load(cls, data_dir: Path) -> "Config":
@@ -73,5 +81,8 @@ class Config:
         breach = raw.get("breach", {}) or {}
         if "single_acceptance_share" in breach:
             cfg.single_acceptance_share = float(breach["single_acceptance_share"])
+        renew = raw.get("renewals", {}) or {}
+        if "alert_count" in renew:
+            cfg.renewal_alert_count = int(renew["alert_count"])
         cfg.__post_init__()  # re-validate after applying overrides
         return cfg

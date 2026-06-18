@@ -15,6 +15,7 @@ from .render import fmt_band, join_clause, plural
 from .views.appetite import classify_breach, render_appetite
 from .views.drift import build_footprint, render_drift
 from .views.ranked import fix_first_clusters, render_ranked
+from .views.renewals import render_renewals
 
 
 def _top_line(engine: Engine, corpus: Corpus, config: Config) -> str:
@@ -124,6 +125,9 @@ def render_report(engine: Engine, corpus: Corpus, config: Config) -> str:
         "---",
         "",
         render_appetite(engine, corpus, config),
+        "---",
+        "",
+        render_renewals(engine, corpus, config),
         "---",
         "",
         render_ranked(engine, corpus, config),

@@ -259,6 +259,10 @@ breach:
   # classified single-acceptance rather than accumulation. (A contributor that
   # breaches appetite alone is single-acceptance regardless of this number.)
   single_acceptance_share: 0.5
+renewals:
+  # An active exception renewed at least this many times with its justification
+  # never revisited is flagged "temporary forever" in the Persistence view.
+  alert_count: 3
 """
 
 
@@ -401,6 +405,9 @@ def build() -> None:
         ("EXC-2026-0128", "Keep shared admin login on legacy queue manager (cutover)",
          [0.011, 0.030], ["legacy-queue-manager"], "remove_shared_accounts", True),
     ]
+    # EXC-...-0122 has been renewed unchanged -> it surfaces in the Persistence
+    # view. Its filed_on stays on the migration timeline (set by next()).
+    legacy_renewals = {"EXC-2026-0122": 3}
     for i, (eid, title, ci, assets, mech, non_plan) in enumerate(legacy):
         write_exception(
             eid, title=title, owner=PLATFORM, filed_on=next(migration_dates),
@@ -409,6 +416,7 @@ def build() -> None:
             with_ci=ci, estimated_by=cal[i % len(cal)], estimated_on="2026-04-15",
             reason="timeline" if i % 3 else "technical_constraint",
             assets=assets, mechanism=mech, non_plan=non_plan,
+            renewals=legacy_renewals.get(eid, 0),
         )
 
     # --- service-account sprawl (its own control) on ACCT-TAKEOVER ----------
@@ -597,13 +605,37 @@ def build() -> None:
         ("EXC-2026-0316", "Defer secondary reviewer on low-severity abuse queue", "tns-lead@company.com",
          "trust-and-safety", "DETECT-MODEL-006", "RISK-ABUSE-DETECTION", [0.03, 0.07], "retrain_detection_model"),
     ]
+    # Renewal history for the Persistence view. (count, justification_changed_last)
+    # Those renewed >= alert_count (3) unchanged flag as "temporary forever"; 0315
+    # was re-examined (justification set) so it does NOT flag; 0311/0316 are
+    # renewed-but-below-threshold so they only populate the "renewed once" count.
+    renewal_overrides = {
+        "EXC-2026-0310": (5, None),
+        "EXC-2026-0311": (1, None),
+        "EXC-2026-0312": (4, None),
+        "EXC-2026-0313": (3, None),
+        "EXC-2026-0314": (4, None),
+        "EXC-2026-0315": (3, "2026-05-01"),
+        "EXC-2026-0316": (2, None),
+    }
+    # Pull the long-lived ones' filed_on back so the renewal counts are
+    # chronologically plausible (an exception renewed 5x was filed years ago).
+    filed_overrides = {
+        "EXC-2026-0310": dt.date(2024, 6, 3),
+        "EXC-2026-0312": dt.date(2024, 11, 18),
+        "EXC-2026-0313": dt.date(2025, 1, 20),
+        "EXC-2026-0314": dt.date(2025, 3, 9),
+        "EXC-2026-0315": dt.date(2024, 9, 14),
+    }
     for i, (eid, title, owner, okr, control, risk, ci, mech) in enumerate(fillers):
+        count, justification = renewal_overrides.get(eid, (0, None))
+        filed_on = filed_overrides.get(eid, dt.date(2026, 3, 1) + dt.timedelta(days=i * 5))
         write_exception(
-            eid, title=title, owner=owner, filed_on=dt.date(2026, 3, 1) + dt.timedelta(days=i * 5),
+            eid, title=title, owner=owner, filed_on=filed_on,
             okr=okr, control=control, mapped_risk=risk,
             moves="probability_of_realization", with_ci=ci, estimated_by=cal[i % len(cal)],
             estimated_on="2026-03-10", reason="cost", assets=[f"{okr}-asset-{i}"],
-            mechanism=mech,
+            mechanism=mech, renewals=count, justification_changed_last=justification,
         )
 
     n = len(list(EXC.glob("*.yaml")))

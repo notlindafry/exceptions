@@ -98,6 +98,22 @@ RISK-DATA-EXFIL carries **$350k–$1.3M** in residual annual loss against a **$6
 
 ---
 
+## Persistence
+
+A temporary exception renewed unchanged is the rule in disguise: the acceptance keeps coming back without anyone revisiting whether it still holds.
+
+8 active exceptions have been renewed at least once; **5 have been renewed 3 or more times with the justification never revisited**, carrying **$77k–$256k** in residual annual loss. That is 'temporary' becoming permanent.
+
+| Exception | What was accepted | Renewals | Mapped risk | Owner |
+|---|---|---|---|---|
+| EXC-2026-0310 | Temporary vendor access for mobile analytics SDK | 5 | VENDOR-ACCESS | mobile-lead@company.com |
+| EXC-2026-0312 | Allow read-only vendor access to internal dashboards | 4 | VENDOR-ACCESS | mobile-lead@company.com |
+| EXC-2026-0314 | Temporary vendor SSH to internal-tools sandbox | 4 | VENDOR-ACCESS | it-lead@company.com |
+| EXC-2026-0122 | Keep password-only auth on legacy build server | 3 | ACCT-TAKEOVER | platform-lead@company.com |
+| EXC-2026-0313 | Defer EDR upgrade on internal-tools jump host | 3 | ENDPOINT-MALWARE | it-lead@company.com |
+
+---
+
 ## Ranked list — what to fix first
 
 Grouped by root cause (the control deviated from), ranked by expected residual contribution. Each row is ready to assign. Only clusters that breach an appetite — or whose upper bound alone would — are listed; clusters that sit within appetite appear in the drift view, not here.
