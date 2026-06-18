@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Risk Ledger — Validation Error Example</title>
+<style>
+:root { color-scheme: light dark; }
+body { font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+       max-width: 920px; margin: 2rem auto; padding: 0 1.25rem; color: #1a1a1a; background: #fff; }
+h1 { font-size: 1.9rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.4rem; margin: 2rem 0 .5rem; border-bottom: 2px solid #eee; padding-bottom: .25rem; }
+h3 { font-size: 1.15rem; margin: 1.5rem 0 .4rem; }
+p { margin: .6rem 0; }
+hr { border: 0; border-top: 1px solid #e3e3e3; margin: 1.75rem 0; }
+table { border-collapse: collapse; width: 100%; margin: .75rem 0 1.25rem; font-size: .93rem; }
+th, td { border: 1px solid #ddd; padding: .45rem .6rem; text-align: left; vertical-align: top; }
+th { background: #f5f6f8; }
+tbody tr:nth-child(even) { background: #fafafa; }
+code { background: #f0f0f2; padding: .05rem .35rem; border-radius: 3px; font-size: .9em; }
+ul { margin: .5rem 0 1rem; }
+.over { color: #b00020; font-weight: 700; }
+.straddling { color: #b06a00; font-weight: 700; }
+.within { color: #0a7d33; font-weight: 700; }
+</style></head>
+<body><main>
+<h1>Risk Ledger — validation error example</h1>
+<p><em>This page documents what <code>risk-ledger</code> does when the risk register contains invalid data. It was produced from a deliberately broken copy of the demo corpus and is kept here as a reference — <strong>the committed corpus is valid</strong>. To reproduce: set <code>RISK-ACCT-TAKEOVER</code>'s <code>probability_of_realization_90ci</code> to <code>[0.005, 1.5]</code> in <code>data/risks.yaml</code> and run <code>risk-ledger validate</code>.</em></p>
+<hr/>
+<h2>What was broken</h2>
+<p>A single field in <code>data/risks.yaml</code>, on the <code>RISK-ACCT-TAKEOVER</code> baseline:</p>
+<ul><li>before (valid): <code>probability_of_realization_90ci: [0.005, 0.02]</code></li><li>after (invalid): <code>probability_of_realization_90ci: [0.005, 1.5]</code> — a probability is a number in <code>(0, 1)</code>, so <code>1.5</code> cannot be the high end of a 90% CI.</li></ul>
+<p>The honesty gate for a malformed baseline is an <strong>error</strong>, not a flag: the risk can no longer anchor any estimate, so the risk <em>and every exception mapped to it</em> are rejected, and the CLI exits non-zero. A malformed record cannot be merged silently.</p>
+<hr/>
+<h2>What <code>risk-ledger validate</code> reports (exit 1)</h2>
+<h3>Validation</h3>
+<h4>Risk register</h4>
+<ul><li>[ERROR] RISK-ACCT-TAKEOVER: baseline probability_of_realization is not a valid 90% CI: [0.005, 1.5]</li></ul>
+<h4>Rejected (hard errors)</h4>
+<ul><li>[ERROR] EXC-2026-0118: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0119: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0120: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0121: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0122: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0123: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0124: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0125: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0126: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0127: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0128: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0142: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li><li>[ERROR] EXC-2026-0151: mapped_risk 'RISK-ACCT-TAKEOVER' has a malformed baseline/appetite</li></ul>
+<h4>Flagged (kept, handled specially)</h4>
+<ul><li>[ACTION FLAG] EXC-2026-0140: reason is resource_reallocation but reason_detail.diverted_to is missing</li><li>[TRUST FLAG] EXC-2026-0149: estimator 't.brooks@company.com' is not calibrated</li><li>[TRUST FLAG] EXC-2026-0301: estimator 'l.romano@company.com' calibration is 868d old (refresh window 365d)</li><li>[TRUST FLAG] EXC-2026-0302: estimator 'l.romano@company.com' calibration is 868d old (refresh window 365d)</li></ul>
+<h4>Summary</h4>
+<ul><li>49 exception record(s)</li><li>32 clean, 4 flagged, 13 rejected</li><li>5 remediation(s), 0 rejected</li></ul>
+<p>14 hard error(s). Exit 1.</p>
+<hr/>
+<h2>What <code>risk-ledger report</code> does</h2>
+<p>Unlike <code>validate</code>, the report command does not abort on a malformed risk — it excludes the rejected records and recomputes. The page still renders and the process exits <code>0</code>, but the broken risk and its 13 exceptions silently disappear: the header drops from <strong>14 mapped risks</strong> to <strong>13</strong>, and the <em>Data confidence</em> section gains the line <em>"13 records failed a hard gate and were rejected outright."</em> This is exactly why <code>validate</code> is the gate to run first — it is wired to exit non-zero so CI can block the merge before any report built on the broken corpus is trusted.</p>
+</main></body></html>
