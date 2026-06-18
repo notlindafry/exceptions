@@ -238,6 +238,11 @@ core-platform:
     - 99.9% availability across core services
     - quarterly DR test passing
   period_end: 2026-12-31
+
+run-the-business:
+  title: run-the-business
+  objective: maintain core operations otherwise not associated with a strategic objective
+  # the non-strategic catch-all: no key results, and ongoing (no period_end)
 """
 
 CONFIG = """\
