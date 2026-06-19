@@ -802,6 +802,43 @@ def build() -> None:
     print(f"Wrote {n} exception files to {EXC}")
     print(f"Wrote {r} remediation files to {REM}")
 
+    write_example_report()
+
+
+# The demo's canonical "as of" date -- the same 2026-06-18 the tests pin -- so the
+# committed sample report is reproducible regardless of the day it is regenerated.
+REPORT_AS_OF = dt.date(2026, 6, 18)
+
+
+def write_example_report() -> None:
+    """Render the committed sample report (markdown + HTML) from the corpus just
+    written, so ``docs/example-report.{md,html}`` never drift from the data.
+
+    Imports are deferred so the generator's top level stays dependency-free; the
+    repo root is put on the path first, so this works when run as a plain script
+    (``python examples/generate_corpus.py``) without an editable install.
+    """
+    import sys
+
+    sys.path.insert(0, str(ROOT))
+    from risk_ledger.config import Config
+    from risk_ledger.engine import Engine
+    from risk_ledger.loader import load_corpus
+    from risk_ledger.render import html_document, markdown_to_html
+    from risk_ledger.report import render_report
+    from risk_ledger.validation import validate_corpus
+
+    cfg = Config.load(DATA)
+    cfg.as_of = REPORT_AS_OF
+    corpus = load_corpus(DATA)
+    validate_corpus(corpus, cfg)
+    text = render_report(Engine(corpus, cfg), corpus, cfg)
+
+    docs = ROOT / "docs"
+    (docs / "example-report.md").write_text(text)
+    (docs / "example-report.html").write_text(html_document(markdown_to_html(text)))
+    print(f"Wrote {docs / 'example-report.md'} and {docs / 'example-report.html'}")
+
 
 if __name__ == "__main__":
     build()

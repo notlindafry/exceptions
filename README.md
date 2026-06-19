@@ -88,8 +88,9 @@ risk-ledger renewals                 # persistence: "temporary forever" exceptio
 
 By default the tool reads the corpus in `./data`. A worked example corpus ships
 there, and the report it produces is committed at
-[`docs/example-report.md`](docs/example-report.md). Regenerate the example with
-`python examples/generate_corpus.py`.
+[`docs/example-report.md`](docs/example-report.md), with a rendered
+[`docs/example-report.html`](docs/example-report.html) alongside it. Regenerate
+the corpus and both snapshots with `python examples/generate_corpus.py`.
 
 ```bash
 risk-ledger --data data report --out report.md
