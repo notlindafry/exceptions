@@ -154,6 +154,26 @@ RISK-DATA-RESIDENCY:
     probability_of_realization_90ci: [0.06, 0.11]   # given a flow, chance it lands non-compliant
     loss_magnitude_90ci: [5000000, 9000000]         # regulatory penalty, remediation, reputational loss
   appetite_threshold: 14000000
+
+# Two more register-driven risks with NO exceptions mapped to them, each the clean
+# target of a funded strengthen (REM-2026-0008, REM-2026-0009): a below-baseline
+# buy-down with no exception cluster behind it. Both within appetite today, so
+# neither adds a current breach.
+RISK-CARD-TESTING:
+  title: Automated card-testing against the public checkout flow
+  baseline:
+    opportunity_frequency_90ci: [20, 60]            # automated checkout attempts per year probing stolen cards
+    probability_of_realization_90ci: [0.015, 0.05]  # given an attempt, chance it lands a fraudulent charge
+    loss_magnitude_90ci: [800000, 2500000]          # chargebacks, scheme fees, remediation per incident
+  appetite_threshold: 12000000
+
+RISK-PIPELINE-INTEGRITY:
+  title: Schema-invalid or corrupted writes entering the data pipeline
+  baseline:
+    opportunity_frequency_90ci: [6, 20]             # corrupting write events per year reaching the pipeline
+    probability_of_realization_90ci: [0.02, 0.08]   # given a bad write, chance it corrupts a downstream decision
+    loss_magnitude_90ci: [600000, 2000000]          # rework, bad downstream decisions, remediation
+  appetite_threshold: 8000000
 """
 
 ESTIMATORS = """\
@@ -739,8 +759,9 @@ def build() -> None:
     # REM-0006..0009: four more strengthens. 0006/0007 land on RISK-ACCT-TAKEOVER
     # and RISK-DATA-EXFIL, which also carry restores -- the engine composes clear-
     # the-cluster with swap-the-factor, so both drop further below baseline. 0008/
-    # 0009 land on within-appetite risks, buying a risk down with no breach to point
-    # at, so their Breaches cell is empty (like REM-0005). Every post band sits below
+    # 0009 land on RISK-CARD-TESTING and RISK-PIPELINE-INTEGRITY -- two within-appetite
+    # risks with NO exceptions, a clean below-baseline buy-down with no cluster behind
+    # it, so their Breaches cell is empty (like REM-0005). Every post band sits below
     # that risk's baseline on the moved factor (see risks.yaml).
     write_remediation(
         "REM-2026-0006",
@@ -763,16 +784,16 @@ def build() -> None:
         "REM-2026-0008", title="Deploy device fingerprinting and step-up 3DS on checkout",
         rtype="strengthen", status="funded", owner="payments-lead@company.com",
         mechanism="deploy_device_fingerprinting_and_3ds", target_date="2026-10-15",
-        mapped_risk="RISK-PAYMENT-FRAUD", moves="probability_of_realization",
-        post_control_90ci=[0.005, 0.03],  # below baseline PoR [0.02, 0.06]
+        mapped_risk="RISK-CARD-TESTING", moves="probability_of_realization",
+        post_control_90ci=[0.005, 0.03],  # below baseline PoR [0.015, 0.05]
         estimated_by="p.nguyen@company.com", estimated_on="2026-06-01",
     )
     write_remediation(
         "REM-2026-0009", title="Add write-time schema validation and integrity gates",
         rtype="strengthen", status="in_progress", owner=DATAPLAT,
         mechanism="add_write_time_integrity_gates", target_date="2026-09-15",
-        mapped_risk="RISK-MIGRATION-DATAINTEGRITY", moves="opportunity_frequency",
-        post_control_90ci=[2, 8],  # below baseline OF [5, 20]
+        mapped_risk="RISK-PIPELINE-INTEGRITY", moves="opportunity_frequency",
+        post_control_90ci=[2, 8],  # below baseline OF [6, 20]
         estimated_by="m.haddad@company.com", estimated_on="2026-06-01",
     )
 

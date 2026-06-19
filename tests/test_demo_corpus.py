@@ -165,10 +165,21 @@ def test_persistence_flagged(built):
 
 def test_new_risk_data_residency(built):
     corpus, _, engine = built
-    assert sum(1 for rid in corpus.risks if engine.risk_is_computable(rid)) == 14
+    assert sum(1 for rid in corpus.risks if engine.risk_is_computable(rid)) == 16
     # Material exposure but within appetite today, and no exceptions behind it.
     assert engine.residual("RISK-DATA-RESIDENCY").state == "within"
     assert not any(e.mapped_risk == "RISK-DATA-RESIDENCY" for e in corpus.exceptions)
+
+
+def test_strengthen_only_risks_have_no_exceptions(built):
+    # REM-0008/0009 target two register-driven risks with no exceptions mapped to
+    # them: a clean below-baseline buy-down with no cluster behind it. Both within
+    # appetite, so neither adds a current breach.
+    corpus, _, engine = built
+    for rid in ("RISK-CARD-TESTING", "RISK-PIPELINE-INTEGRITY"):
+        assert engine.risk_is_computable(rid)
+        assert not any(e.mapped_risk == rid for e in corpus.exceptions)
+        assert engine.residual(rid).state == "within"
 
 
 def test_remediations_loaded(built):
@@ -245,7 +256,7 @@ def test_report_html_renders_both_charts(built):
     assert html.count("<svg") == 2
     # Annualization is unmistakable on the charts and in the framing sentence.
     assert "annual loss exposure ($M)" in html  # arc axis
-    assert "aggregate annual appetite $193M" in html  # arc appetite line
+    assert "aggregate annual appetite $213M" in html  # arc appetite line
     assert html.count("annual appetite") >= 4  # 1 aggregate + 3 per-risk lines
     assert "single-loss expectancy" in html
 

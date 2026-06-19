@@ -1,6 +1,6 @@
 # Company Corp Exceptions Risk Report
 
-**Generated 2026-06-18 · Scope: all active exceptions · 49 records, 7 OKRs, 14 mapped risks**
+**Generated 2026-06-18 · Scope: all active exceptions · 49 records, 7 OKRs, 16 mapped risks**
 
 Every figure in this report is annual loss exposure: the expected loss per year, with event frequency already folded in. None of it is single-loss expectancy — a magnitude is multiplied by how often the loss event occurs before it appears here.
 
@@ -14,14 +14,14 @@ The **gcloud-migration** OKR is the dominant source of newly accepted risk. **2 
 
 ## 2026 risk exposure
 
-Entering 2026 the book carried **$21.0M–$38.0M** in residual annual loss exposure (0 over appetite). Mid-year it stands at **$119.4M–$289.6M** (2 over). If the funded plan executes it exits 2026 at **$65.8M–$169.0M** (1 over). The move from entering to exiting is the headline; these bands do not add to a to-the-dollar waterfall.
+Entering 2026 the book carried **$22.9M–$40.5M** in residual annual loss exposure (0 over appetite). Mid-year it stands at **$121.2M–$291.6M** (2 over). If the funded plan executes it exits 2026 at **$68.4M–$172.2M** (1 over). The move from entering to exiting is the headline; these bands do not add to a to-the-dollar waterfall.
 
 Two forces move the book: the 2026 acceptances pushed it up (the gcloud-migration OKR alone adds $84.6M–$252.8M); the funded plan pulls it down (8 funded remediations, the largest buying down $17.5M–$139.4M).
 
 The exit figure is a projection conditional on the funded plan executing; RISK-PLATFORM-OUTAGE is projected to remain over, its fix unfunded.
 
 <!--RL-RAW-SVG-->
-<svg class="rl-chart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 218" width="720" height="218"><title>2026 annual loss exposure arc</title><rect x="0" y="0" width="720" height="218" fill="#fff"/><line x1="432.5" y1="32" x2="432.5" y2="172" stroke="#1a1a1a" stroke-width="1.3" stroke-dasharray="5 4"/><text x="432.5" y="22" class="rl-muted" text-anchor="middle">aggregate annual appetite $193M</text><text x="140" y="63" class="rl-label" text-anchor="end">entering 2026</text><text x="194.9" y="46" class="rl-muted" text-anchor="middle">$21–38M</text><rect x="182.5" y="51" width="24.7" height="16" rx="2" fill="#5b7a99"/><text x="597" y="63" class="rl-status" text-anchor="start">0 over appetite</text><text x="140" y="109" class="rl-label" text-anchor="end">mid-year (today)</text><text x="449.2" y="92" class="rl-muted" text-anchor="middle">$119–290M</text><rect x="325.6" y="97" width="247.3" height="16" rx="2" fill="#5b7a99"/><text x="597" y="109" class="rl-status" text-anchor="start">2 over appetite</text><text x="140" y="155" class="rl-label" text-anchor="end">exiting 2026</text><text x="322.6" y="138" class="rl-muted" text-anchor="middle">$66–169M</text><rect x="247.6" y="143" width="150" height="16" rx="2" fill="#5b7a99"/><text x="597" y="155" class="rl-status" text-anchor="start">1 over appetite</text><line x1="152" y1="178" x2="588" y2="178" stroke="#ccc" stroke-width="1.0"/><line x1="152" y1="178" x2="152" y2="182" stroke="#ccc" stroke-width="1.0"/><text x="152" y="193" class="rl-muted" text-anchor="middle">0</text><line x1="297.3" y1="178" x2="297.3" y2="182" stroke="#ccc" stroke-width="1.0"/><text x="297.3" y="193" class="rl-muted" text-anchor="middle">100</text><line x1="442.7" y1="178" x2="442.7" y2="182" stroke="#ccc" stroke-width="1.0"/><text x="442.7" y="193" class="rl-muted" text-anchor="middle">200</text><line x1="588" y1="178" x2="588" y2="182" stroke="#ccc" stroke-width="1.0"/><text x="588" y="193" class="rl-muted" text-anchor="middle">300</text><text x="370" y="210" class="rl-label" text-anchor="middle">annual loss exposure ($M)</text></svg>
+<svg class="rl-chart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 218" width="720" height="218"><title>2026 annual loss exposure arc</title><rect x="0" y="0" width="720" height="218" fill="#fff"/><line x1="461.6" y1="32" x2="461.6" y2="172" stroke="#1a1a1a" stroke-width="1.3" stroke-dasharray="5 4"/><text x="461.6" y="22" class="rl-muted" text-anchor="middle">aggregate annual appetite $213M</text><text x="140" y="63" class="rl-label" text-anchor="end">entering 2026</text><text x="198" y="46" class="rl-muted" text-anchor="middle">$23–40M</text><rect x="185.3" y="51" width="25.6" height="16" rx="2" fill="#5b7a99"/><text x="597" y="63" class="rl-status" text-anchor="start">0 over appetite</text><text x="140" y="109" class="rl-label" text-anchor="end">mid-year (today)</text><text x="452" y="92" class="rl-muted" text-anchor="middle">$121–292M</text><rect x="328.2" y="97" width="247.6" height="16" rx="2" fill="#5b7a99"/><text x="597" y="109" class="rl-status" text-anchor="start">2 over appetite</text><text x="140" y="155" class="rl-label" text-anchor="end">exiting 2026</text><text x="326.8" y="138" class="rl-muted" text-anchor="middle">$68–172M</text><rect x="251.4" y="143" width="150.9" height="16" rx="2" fill="#5b7a99"/><text x="597" y="155" class="rl-status" text-anchor="start">1 over appetite</text><line x1="152" y1="178" x2="588" y2="178" stroke="#ccc" stroke-width="1.0"/><line x1="152" y1="178" x2="152" y2="182" stroke="#ccc" stroke-width="1.0"/><text x="152" y="193" class="rl-muted" text-anchor="middle">0</text><line x1="297.3" y1="178" x2="297.3" y2="182" stroke="#ccc" stroke-width="1.0"/><text x="297.3" y="193" class="rl-muted" text-anchor="middle">100</text><line x1="442.7" y1="178" x2="442.7" y2="182" stroke="#ccc" stroke-width="1.0"/><text x="442.7" y="193" class="rl-muted" text-anchor="middle">200</text><line x1="588" y1="178" x2="588" y2="182" stroke="#ccc" stroke-width="1.0"/><text x="588" y="193" class="rl-muted" text-anchor="middle">300</text><text x="370" y="210" class="rl-label" text-anchor="middle">annual loss exposure ($M)</text></svg>
 <!--/RL-RAW-SVG-->
 
 ---
@@ -69,7 +69,7 @@ Each OKR has two footprints: the risk it accepts on itself, and the risk it push
 
 ## Appetite breach
 
-Stated tolerance across 14 tracked risks sums to **$193.0M**; the acceptances on the books reveal the organization is carrying **$119.4M–$289.6M** in residual annual loss exposure. 2 risks over and 1 risk straddling appetite.
+Stated tolerance across 16 tracked risks sums to **$213.0M**; the acceptances on the books reveal the organization is carrying **$121.2M–$291.6M** in residual annual loss exposure. 2 risks over and 1 risk straddling appetite.
 
 Of the 3 risks over or straddling appetite today, 1 risk (RISK-PLATFORM-OUTAGE) remains over after the funded plan executes. Projections below are conditional on that plan.
 
@@ -122,7 +122,7 @@ RISK-DATA-EXFIL carries **$3.5M–$13.4M** in residual annual loss exposure agai
 
 **After the funded plan** (Tokenize PII fields in the analytics warehouse and Re-enable DLP with tuned rules on export paths): projected **within** appetite, at **$181k–$1.7M** residual. Conditional on the funded plan executing.
 
-**Within appetite:** RISK-PCI-SCOPE, RISK-PAYMENT-FRAUD, RISK-DATA-QUALITY, RISK-DATA-RESIDENCY, RISK-DATA-AVAILABILITY, RISK-ABUSE-ESCALATION, RISK-ABUSE-DETECTION, RISK-MIGRATION-AVAILABILITY, RISK-ENDPOINT-MALWARE, RISK-MIGRATION-DATAINTEGRITY, and RISK-VENDOR-ACCESS.
+**Within appetite:** RISK-PCI-SCOPE, RISK-PAYMENT-FRAUD, RISK-DATA-QUALITY, RISK-DATA-RESIDENCY, RISK-DATA-AVAILABILITY, RISK-ABUSE-ESCALATION, RISK-ABUSE-DETECTION, RISK-MIGRATION-AVAILABILITY, RISK-ENDPOINT-MALWARE, RISK-CARD-TESTING, RISK-MIGRATION-DATAINTEGRITY, RISK-VENDOR-ACCESS, and RISK-PIPELINE-INTEGRITY.
 
 ---
 
@@ -153,11 +153,11 @@ This ranks the work that moves quantified risk, by the residual it buys down, wh
 | 3 | REM-2026-0001 — Enforce SSO via the IdP across legacy consoles | $5.7M–$9.7M | ACCT-TAKEOVER | Enforce sso via idp in order to reduce probability of realization no later than 2026-09-01 | platform-lead@company.com |
 | 4 | REM-2026-0005 — Implement automated data-residency controls | $3.4M–$8.5M | — | Implement automated data residency controls in order to reduce loss magnitude no later than 2026-10-01 | data-platform-lead@company.com |
 | 5 | REM-2026-0002 — Re-enable DLP with tuned rules on export paths | $2.3M–$11.1M | DATA-EXFIL | Re enable dlp with tuned rules in order to reduce loss magnitude no later than 2026-09-01 | data-platform-lead@company.com |
-| 6 | REM-2026-0008 — Deploy device fingerprinting and step-up 3DS on checkout | $497k–$2.6M | — | Deploy device fingerprinting and 3ds in order to reduce probability of realization no later than 2026-10-15 | payments-lead@company.com |
-| 7 | REM-2026-0007 — Tokenize PII fields in the analytics warehouse | $271k–$2.6M | DATA-EXFIL | Tokenize pii in warehouse in order to reduce loss magnitude no later than 2026-11-15 | data-platform-lead@company.com |
+| 6 | REM-2026-0007 — Tokenize PII fields in the analytics warehouse | $271k–$2.6M | DATA-EXFIL | Tokenize pii in warehouse in order to reduce loss magnitude no later than 2026-11-15 | data-platform-lead@company.com |
+| 7 | REM-2026-0008 — Deploy device fingerprinting and step-up 3DS on checkout | $303k–$1.7M | — | Deploy device fingerprinting and 3ds in order to reduce probability of realization no later than 2026-10-15 | payments-lead@company.com |
 | 8 | EXC-2026-0151 — Service-account sprawl on migrated workloads | $198k–$1.1M | ACCT-TAKEOVER | Rotate and scope service accounts in order to reduce probability of realization no later than 2026-09-01 | iam-lead@company.com |
 | 9 | REM-2026-0006 — Deploy phishing-resistant MFA (FIDO2 passkeys) across all consoles | $128k–$1.1M | ACCT-TAKEOVER | Deploy phishing resistant mfa in order to reduce probability of realization no later than 2026-11-01 | iam-lead@company.com |
-| 10 | REM-2026-0009 — Add write-time schema validation and integrity gates | $75k–$939k | — | Add write time integrity gates in order to reduce opportunity frequency no later than 2026-09-15 | data-platform-lead@company.com |
+| 10 | REM-2026-0009 — Add write-time schema validation and integrity gates | $104k–$885k | — | Add write time integrity gates in order to reduce opportunity frequency no later than 2026-09-15 | data-platform-lead@company.com |
 
 ### Sent back, not ranked
 

@@ -116,3 +116,23 @@ RISK-DATA-RESIDENCY:
     probability_of_realization_90ci: [0.06, 0.11]   # given a flow, chance it lands non-compliant
     loss_magnitude_90ci: [5000000, 9000000]         # regulatory penalty, remediation, reputational loss
   appetite_threshold: 14000000
+
+# Two more register-driven risks with NO exceptions mapped to them, each the clean
+# target of a funded strengthen (REM-2026-0008, REM-2026-0009): a below-baseline
+# buy-down with no exception cluster behind it. Both within appetite today, so
+# neither adds a current breach.
+RISK-CARD-TESTING:
+  title: Automated card-testing against the public checkout flow
+  baseline:
+    opportunity_frequency_90ci: [20, 60]            # automated checkout attempts per year probing stolen cards
+    probability_of_realization_90ci: [0.015, 0.05]  # given an attempt, chance it lands a fraudulent charge
+    loss_magnitude_90ci: [800000, 2500000]          # chargebacks, scheme fees, remediation per incident
+  appetite_threshold: 12000000
+
+RISK-PIPELINE-INTEGRITY:
+  title: Schema-invalid or corrupted writes entering the data pipeline
+  baseline:
+    opportunity_frequency_90ci: [6, 20]             # corrupting write events per year reaching the pipeline
+    probability_of_realization_90ci: [0.02, 0.08]   # given a bad write, chance it corrupts a downstream decision
+    loss_magnitude_90ci: [600000, 2000000]          # rework, bad downstream decisions, remediation
+  appetite_threshold: 8000000
