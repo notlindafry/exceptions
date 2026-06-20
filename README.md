@@ -102,6 +102,14 @@ A GitHub Action ([`.github/workflows/deploy-report.yml`](.github/workflows/deplo
 regenerates the report from the corpus and redeploys on every push to `main`, so
 the live page never drifts from the data.
 
+> ⚠️ **The deploy is public and automatic.** Every push to `main` publishes
+> whatever is in `data/` to the live URL above — there is no separate "make this
+> public" step. The shipped corpus is synthetic; do **not** commit real or
+> sensitive risk data unless you intend it to be world-readable. Protect `main`
+> (require PR review) so nothing publishes unreviewed, and prefer Vercel
+> Password Protection or your own auth if the report ever carries real data. The
+> page is served with `noindex` and a `robots.txt` deny to keep it out of search.
+
 <details>
 <summary>One-time Vercel setup</summary>
 

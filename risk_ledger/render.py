@@ -274,6 +274,9 @@ def html_document(body_html: str, title: str = "Company Corp Exceptions Risk Rep
         "<!DOCTYPE html>\n"
         '<html lang="en"><head><meta charset="utf-8"/>\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1"/>\n'
+        # Keep the report out of search indexes: it may carry sensitive risk
+        # data, and the publish pipeline serves it on a public URL.
+        '<meta name="robots" content="noindex, nofollow"/>\n'
         f"<title>{_html.escape(title)}</title>\n"
         f"<style>{_CSS}</style></head>\n"
         f"<body><main>\n{body_html}\n</main></body></html>\n"

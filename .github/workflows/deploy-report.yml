@@ -5,6 +5,10 @@ name: Deploy report
 # rendered here (Python runs on the runner) and shipped to Vercel as a prebuilt
 # static page -- Vercel only serves it, it does not build anything.
 #
+# WARNING: this publishes whatever is in ./data to a PUBLIC URL on every push to
+# main. Do not commit sensitive or real risk data unless the deployment is meant
+# to be public. Protect `main` (require PR review) so nothing publishes unseen.
+#
 # Secrets required (repo Settings -> Secrets and variables -> Actions):
 # VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID.
 
@@ -42,6 +46,8 @@ jobs:
         run: |
           mkdir -p public
           cp docs/example-report.html public/index.html
+          # The report is served on a public URL -- keep crawlers out entirely.
+          printf 'User-agent: *\nDisallow: /\n' > public/robots.txt
 
       - name: Deploy to Vercel
         env:
