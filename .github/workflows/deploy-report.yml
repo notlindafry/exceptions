@@ -4,6 +4,9 @@ name: Deploy report
 # Vercel, so the live page never drifts from the committed data. The report is
 # rendered here (Python runs on the runner) and shipped to Vercel as a prebuilt
 # static page -- Vercel only serves it, it does not build anything.
+#
+# Secrets required (repo Settings -> Secrets and variables -> Actions):
+# VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID.
 
 on:
   push:
