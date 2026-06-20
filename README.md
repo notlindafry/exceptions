@@ -96,7 +96,7 @@ The charts only render in the HTML, and GitHub serves committed `.html` as
 source rather than a live page, so the rendered report is also published to
 Vercel — open it in a browser, no download needed:
 
-**▶ [Live report](https://YOUR-PROJECT.vercel.app)** *(replace with your Vercel URL)*
+**▶ [Live report](https://grc-report.vercel.app)**
 
 A GitHub Action ([`.github/workflows/deploy-report.yml`](.github/workflows/deploy-report.yml))
 regenerates the report from the corpus and redeploys on every push to `main`, so
