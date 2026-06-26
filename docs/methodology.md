@@ -31,7 +31,7 @@ Risk is three estimated variables, each a 90% confidence interval:
 
 ```
 LEF = OF × PoR        (Loss Event Frequency: how often the loss event happens)
-ALE = LEF × LM        (Annual Loss Exposure)
+ALE = LEF × LM        (Annualized Loss Exposure)
 ```
 
 Loss Event Frequency and Loss Magnitude are unchanged from FAIR and already read

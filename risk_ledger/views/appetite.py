@@ -91,7 +91,7 @@ def _risk_section(engine: Engine, corpus: Corpus, res: ResidualResult) -> str:
     lines = [f"### {risk.id} — {badge}", ""]
 
     headline = (
-        f"{risk.id} carries **{fmt_band(res.band)}** in residual annual loss exposure against a "
+        f"{risk.id} carries **{fmt_band(res.band)}** in residual annualized loss exposure against a "
         f"**{fmt_threshold(res.threshold)}** appetite, and {BAND_POSITION[res.state]}."
     )
 
@@ -118,7 +118,7 @@ def _risk_section(engine: Engine, corpus: Corpus, res: ResidualResult) -> str:
             culprit = _exc_label(corpus, breach.culprit_id) if breach.culprit_id else "one exception"
             headline += (
                 f" This is a **single-acceptance breach**: {culprit} accounts for "
-                f"{pct(breach.dominant_share)} of the contributed annual loss exposure. "
+                f"{pct(breach.dominant_share)} of the contributed annualized loss exposure. "
                 f"One owner, one decision to revisit."
             )
     lines.append(headline)
@@ -208,7 +208,7 @@ def render_appetite(engine: Engine, corpus: Corpus, config: Config, only_risk: s
         out.append(
             f"Stated tolerance across {plural(len(residuals), 'tracked risk')} sums to "
             f"**{fmt_threshold(stated)}**; the acceptances on the books reveal the organization "
-            f"is carrying **{fmt_band(portfolio)}** in residual annual loss exposure.{breach_clause}"
+            f"is carrying **{fmt_band(portfolio)}** in residual annualized loss exposure.{breach_clause}"
         )
         out.append("")
 

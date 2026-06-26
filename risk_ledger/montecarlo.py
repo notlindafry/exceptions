@@ -194,7 +194,7 @@ class MonteCarlo:
         *,
         key: str,
     ) -> list[float]:
-        """Annual Loss Exposure draws: ``ALE = OF * PoR * LM`` (LEF = OF*PoR)."""
+        """Annualized Loss Exposure draws: ``ALE = OF * PoR * LM`` (LEF = OF*PoR)."""
         z_cf = self._standard_normals(key, "cf")
         z_poa = self._standard_normals(key, "poa")
         z_lm = self._standard_normals(key, "lm")

@@ -48,7 +48,7 @@ def _arc_rows():
 def test_exposure_arc_bars_are_neutral_not_the_semantic_ramp():
     svg = exposure_arc_svg(
         _arc_rows(), 193e6,
-        axis_label="annual loss exposure ($M)",
+        axis_label="annualized loss exposure ($M)",
         appetite_label="aggregate annual appetite $193M",
     )
     assert svg.startswith("<svg") and svg.rstrip().endswith("</svg>")
@@ -60,7 +60,7 @@ def test_exposure_arc_bars_are_neutral_not_the_semantic_ramp():
 def test_exposure_arc_over_count_labels_are_neutral():
     svg = exposure_arc_svg(
         _arc_rows(), 193e6,
-        axis_label="annual loss exposure ($M)",
+        axis_label="annualized loss exposure ($M)",
         appetite_label="aggregate annual appetite $193M",
     )
     # The counts still show (the data); their colour is neutral, not a RAG ramp.
@@ -72,10 +72,10 @@ def test_exposure_arc_over_count_labels_are_neutral():
 def test_exposure_arc_annualization_on_axis_and_appetite_line():
     svg = exposure_arc_svg(
         _arc_rows(), 193e6,
-        axis_label="annual loss exposure ($M)",
+        axis_label="annualized loss exposure ($M)",
         appetite_label="aggregate annual appetite $193M",
     )
-    assert "annual loss exposure ($M)" in svg
+    assert "annualized loss exposure ($M)" in svg
     assert "aggregate annual appetite $193M" in svg
     assert range_label(band(119e6, 290e6)) in svg  # each band's range printed
 
@@ -126,7 +126,7 @@ def test_appetite_ranges_current_is_solid_projected_is_outline():
 
 
 def test_charts_carry_no_rag_colours():
-    arc = exposure_arc_svg(_arc_rows(), 193e6, axis_label="annual loss exposure ($M)",
+    arc = exposure_arc_svg(_arc_rows(), 193e6, axis_label="annualized loss exposure ($M)",
                            appetite_label="aggregate annual appetite $193M")
     app = appetite_ranges_svg(_appetite_plots())
     for svg in (arc, app):
@@ -139,7 +139,7 @@ def test_charts_carry_no_rag_colours():
 def test_appetite_ranges_has_numbered_x_axis_and_label():
     svg = appetite_ranges_svg(_appetite_plots())
     # One shared axis label at the foot.
-    assert svg.count("annual loss exposure ($M)") == 1
+    assert svg.count("annualized loss exposure ($M)") == 1
     # Per-panel tick numbers in $M -- each panel on its own scale.
     assert ">250</text>" in svg  # PLATFORM panel (axis max 250M)
     assert ">15</text>" in svg   # ACCT / DATA-EXFIL panels (axis max 15M)
@@ -181,7 +181,7 @@ def test_drift_ledgers_prints_both_ranges_and_axis_label():
     assert range_label(true_band) in svg  # $85–253M, the true (combined) band
     assert "on its own ledger" in svg
     assert "true footprint" in svg
-    assert "annual loss exposure ($M)" in svg  # the annualization-bearing axis title
+    assert "annualized loss exposure ($M)" in svg  # the annualization-bearing axis title
 
 
 def test_drift_ledgers_escapes_okr_name():

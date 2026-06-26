@@ -55,7 +55,7 @@ confidence interval:
 
 ```
 Loss Event Frequency (LEF) = OF × PoR
-Annual Loss Exposure (ALE) = LEF × LM
+Annualized Loss Exposure (ALE) = LEF × LM
 ```
 
 An exception names the **one** variable it moves and supplies the new range. The

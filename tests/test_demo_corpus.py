@@ -259,7 +259,7 @@ def test_report_html_renders_all_charts(built):
     assert "on its own ledger" in html
     assert "true footprint" in html
     # Annualization is unmistakable on the charts and in the framing sentence.
-    assert "annual loss exposure ($M)" in html  # arc axis
+    assert "annualized loss exposure ($M)" in html  # arc axis
     assert "aggregate annual appetite $213M" in html  # arc appetite line
     assert html.count("annual appetite") >= 4  # 1 aggregate + 3 per-risk lines
     assert "single-loss expectancy" in html

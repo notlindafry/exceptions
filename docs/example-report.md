@@ -2,7 +2,7 @@
 
 **Generated 2026-06-18 · Scope: all active exceptions · 49 records, 7 OKRs, 16 mapped risks**
 
-Every figure in this report is annual loss exposure: the expected loss per year, with event frequency already folded in. None of it is single-loss expectancy — a magnitude is multiplied by how often the loss event occurs before it appears here.
+Every figure in this report is annualized loss exposure: the expected loss per year, with event frequency already folded in. None of it is single-loss expectancy — a magnitude is multiplied by how often the loss event occurs before it appears here.
 
 ---
 
@@ -14,7 +14,7 @@ The **gcloud-migration** OKR is the dominant source of newly accepted risk. **2 
 
 ## 2026 risk exposure
 
-Entering 2026 the book carried **$22.9M–$40.5M** in residual annual loss exposure (0 over appetite). Mid-year it stands at **$121.2M–$291.6M** (2 over). If the funded plan executes it exits 2026 at **$68.4M–$172.2M** (1 over). The move from entering to exiting is the headline; these bands do not add to a to-the-dollar waterfall.
+Entering 2026 the book carried **$22.9M–$40.5M** in residual annualized loss exposure (0 over appetite). Mid-year it stands at **$121.2M–$291.6M** (2 over). If the funded plan executes it exits 2026 at **$68.4M–$172.2M** (1 over). The move from entering to exiting is the headline; these bands do not add to a to-the-dollar waterfall.
 
 Two forces move the book: the 2026 acceptances pushed it up (the gcloud-migration OKR alone adds $84.6M–$252.8M); the funded plan pulls it down (8 funded remediations, the largest buying down $17.5M–$139.4M).
 
@@ -65,13 +65,13 @@ Each OKR has two footprints: the risk it accepts on itself, and the risk it push
 
 ## Appetite breach
 
-Stated tolerance across 16 tracked risks sums to **$213.0M**; the acceptances on the books reveal the organization is carrying **$121.2M–$291.6M** in residual annual loss exposure. 2 risks over and 1 risk straddling appetite.
+Stated tolerance across 16 tracked risks sums to **$213.0M**; the acceptances on the books reveal the organization is carrying **$121.2M–$291.6M** in residual annualized loss exposure. 2 risks over and 1 risk straddling appetite.
 
 Of the 3 risks over or straddling appetite today, 1 risk (RISK-PLATFORM-OUTAGE) remains over after the funded plan executes. Projections below are conditional on that plan.
 
 ### RISK-PLATFORM-OUTAGE — OVER appetite
 
-RISK-PLATFORM-OUTAGE carries **$48.3M–$214.5M** in residual annual loss exposure against a **$15.0M** appetite, and the band sits fully above the line. This is a **single-acceptance breach**: EXC-2026-0170 (Run core services single-region to cut infrastructure cost) accounts for 55% of the contributed annual loss exposure. One owner, one decision to revisit.
+RISK-PLATFORM-OUTAGE carries **$48.3M–$214.5M** in residual annualized loss exposure against a **$15.0M** appetite, and the band sits fully above the line. This is a **single-acceptance breach**: EXC-2026-0170 (Run core services single-region to cut infrastructure cost) accounts for 55% of the contributed annualized loss exposure. One owner, one decision to revisit.
 
 | Exception | What was accepted | Contribution | Over alone? | Owner |
 |---|---|---|---|---|
@@ -82,7 +82,7 @@ RISK-PLATFORM-OUTAGE carries **$48.3M–$214.5M** in residual annual loss exposu
 
 ### RISK-ACCT-TAKEOVER — OVER appetite
 
-RISK-ACCT-TAKEOVER carries **$6.8M–$11.3M** in residual annual loss exposure against a **$5.0M** appetite, and the band sits fully above the line. This is an **accumulation breach**: no single exception caused it — the top 3 accepted gaps each looked tolerable on its own, and together they breach. There is no individual to send this back to; it is a process signal.
+RISK-ACCT-TAKEOVER carries **$6.8M–$11.3M** in residual annualized loss exposure against a **$5.0M** appetite, and the band sits fully above the line. This is an **accumulation breach**: no single exception caused it — the top 3 accepted gaps each looked tolerable on its own, and together they breach. There is no individual to send this back to; it is a process signal.
 
 | Exception | What was accepted | Contribution | Over alone? | Owner |
 |---|---|---|---|---|
@@ -104,7 +104,7 @@ RISK-ACCT-TAKEOVER carries **$6.8M–$11.3M** in residual annual loss exposure a
 
 ### RISK-DATA-EXFIL — STRADDLING appetite
 
-RISK-DATA-EXFIL carries **$3.5M–$13.4M** in residual annual loss exposure against a **$6.0M** appetite, and the band crosses the line, so whether you are over depends on the high end. This is a **single-acceptance breach**: EXC-2026-0133 (DLP disabled on the analytics export path) accounts for 76% of the contributed annual loss exposure. One owner, one decision to revisit.
+RISK-DATA-EXFIL carries **$3.5M–$13.4M** in residual annualized loss exposure against a **$6.0M** appetite, and the band crosses the line, so whether you are over depends on the high end. This is a **single-acceptance breach**: EXC-2026-0133 (DLP disabled on the analytics export path) accounts for 76% of the contributed annualized loss exposure. One owner, one decision to revisit.
 
 | Exception | What was accepted | Contribution | Over alone? | Owner |
 |---|---|---|---|---|
@@ -120,7 +120,7 @@ RISK-DATA-EXFIL carries **$3.5M–$13.4M** in residual annual loss exposure agai
 
 A temporary exception renewed unchanged is the rule in disguise: the acceptance keeps coming back without anyone revisiting whether it still holds.
 
-8 active exceptions have been renewed at least once; **5 have been renewed 3 or more times with the justification never revisited**, carrying **$765k–$2.6M** in residual annual loss exposure. That is 'temporary' becoming permanent.
+8 active exceptions have been renewed at least once; **5 have been renewed 3 or more times with the justification never revisited**, carrying **$765k–$2.6M** in residual annualized loss exposure. That is 'temporary' becoming permanent.
 
 | Exception | What was accepted | Renewals | Mapped risk | Owner |
 |---|---|---|---|---|

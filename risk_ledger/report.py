@@ -90,7 +90,7 @@ def _exposure_arc(engine: Engine, corpus: Corpus, config: Config) -> str:
 
     lines = ["## 2026 risk exposure", ""]
     lines.append(
-        f"Entering 2026 the book carried **{fmt_band(entering)}** in residual annual loss exposure "
+        f"Entering 2026 the book carried **{fmt_band(entering)}** in residual annualized loss exposure "
         f"({entering_over} over appetite). Mid-year it stands "
         f"at **{fmt_band(mid)}** ({mid_over} over). If the funded plan executes it exits "
         f"2026 at **{fmt_band(exiting)}** ({exiting_over} over). The move "
@@ -134,7 +134,7 @@ def _exposure_arc(engine: Engine, corpus: Corpus, config: Config) -> str:
     svg = exposure_arc_svg(
         arc_rows,
         appetite_total,
-        axis_label="annual loss exposure ($M)",
+        axis_label="annualized loss exposure ($M)",
         appetite_label=f"aggregate annual appetite {compact_money(appetite_total)}",
     )
     lines.append(raw_svg_block(svg))
@@ -192,7 +192,7 @@ def render_report(engine: Engine, corpus: Corpus, config: Config) -> str:
         f"{plural(records, 'record')}, {plural(okrs, 'OKR')}, "
         f"{plural(mapped_risks, 'mapped risk')}**",
         "",
-        "Every figure in this report is annual loss exposure: the expected loss per year, with "
+        "Every figure in this report is annualized loss exposure: the expected loss per year, with "
         "event frequency already folded in. None of it is single-loss expectancy — a magnitude is "
         "multiplied by how often the loss event occurs before it appears here.",
         "",

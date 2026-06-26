@@ -208,7 +208,7 @@ def exposure_arc_svg(rows: list[ArcRow], appetite: float, *, axis_label: str,
     body.append(_text((PLOT_X0 + PLOT_X1) / 2, axis_y + 32, axis_label,
                       cls="rl-label", anchor="middle"))
 
-    return _svg(W, height, "".join(body), title="2026 annual loss exposure arc")
+    return _svg(W, height, "".join(body), title="2026 annualized loss exposure arc")
 
 
 # -- chart 2: per-risk appetite ranges (small multiples) ----------------------
@@ -240,7 +240,7 @@ def _transition(current_state: str, post_state: str | None) -> str:
 
 
 def appetite_ranges_svg(plots: list[AppetitePlot], *,
-                        axis_label: str = "annual loss exposure ($M)") -> str:
+                        axis_label: str = "annualized loss exposure ($M)") -> str:
     """One mini-plot per breaching risk, each on its own scale (magnitudes differ
     by more than an order of magnitude, so a shared scale would crush the small
     risks). Current band a solid neutral bar, projected band a neutral outline
@@ -321,7 +321,7 @@ def appetite_ranges_svg(plots: list[AppetitePlot], *,
 # -- chart 3: drift two-ledgers (reported vs true OKR footprint) ---------------
 
 def drift_ledgers_svg(okr_name, internal, true_band, *,
-                      axis_label: str = "annual loss exposure ($M)") -> str:
+                      axis_label: str = "annualized loss exposure ($M)") -> str:
     """Two neutral range bars on one shared linear axis: an OKR's footprint *on
     its own ledger* (the ``internal`` band) and its *true* footprint (the
     ``true_band`` -- internal plus the external risk it pushed onto starved
